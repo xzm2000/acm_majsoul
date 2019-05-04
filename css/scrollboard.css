@@ -90,6 +90,10 @@ th.rank{
     background: #eddccf;
 }
 
+.team-item.girl{
+    background: #FF9999;
+}
+
 #timer{
     margin: 0;
     height: 0!important;
