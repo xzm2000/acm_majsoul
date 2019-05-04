@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollboard.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/scrollboard.js"></script>
+
+</head>
+
+<body>
+	<script type="text/javascript">
+	    var board = new Board(12, new Array(1, 2, 3), StringToDate("2019-03-03 12:00:00"), StringToDate("2019-03-03 14:00:01"));
+	    board.showInitBoard();
+	    $('html').keydown(function(e) {
+	        if (e.keyCode == 13) {
+	            board.keydown();
+	        }
+	    });
+    </script>
+</body>
+
+</html>
