@@ -31,7 +31,7 @@ function getSubmitList() {
                 var submit = result[i];
 				var team = submit.team;
 				var problem = parseInt(submit.num);
-				var score = parseFloat(submit.score);
+				var score = parseInt(submit.score);
 				var alphabetId =String.fromCharCode(problem - 1 + 65);
                 data.push(new Submit(1, team, alphabetId, StringToDate("2019-01-01 12:00:00"), score));
             }
@@ -368,7 +368,7 @@ Board.prototype.showInitBoard = function() {
     var rankPer = 5; //Rank列宽度百分比
     var teamPer = 25; //Team列宽度百分比
     var solvedPer = 4; //Solved列宽度百分比
-    var penaltyPer = 15; //Penalty列宽度百分比
+    var penaltyPer = 7; //Penalty列宽度百分比
     var problemStatusPer = (100.0 - rankPer - teamPer - solvedPer - penaltyPer) / this.problemCount; //Problem列宽度百分比
 
     //表头
@@ -431,7 +431,7 @@ Board.prototype.showInitBoard = function() {
 		else rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + "*" + "</th>";
         var teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
         var solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.solved + "</td>";
-        var penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseFloat(team.penalty) + "</td>";
+        var penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(team.penalty%10) + "</td>";
         var problemHTML = "";
         for (var key in this.problemList) {
             problemHTML += "<td class=\"problem-status\" width=\"" + problemStatusPer + "%\" alphabet-id=\"" + this.problemList[key] + "\">";
@@ -441,10 +441,10 @@ Board.prototype.showInitBoard = function() {
                     problemHTML += "<span class=\"label label-warning\">" + tProblem.submitCount + "</span></td>";
                 else {
                     if (tProblem.penalty >= 0) {
-							problemHTML += "<span class=\"label label-success\">" + parseFloat(tProblem.penalty) + "</td>";
+							problemHTML += "<span class=\"label label-success\">" + parseInt(tProblem.penalty/10) + "." + parseInt(tProblem.penalty % 10) + "</td>";
                         //problemHTML += "<span class=\"label label-success\">" + tProblem.submitCount + "/" + parseInt(tProblem.acceptedTime / 1000.0 / 60.0) + "</span></td>";
                     } else {
-                        problemHTML += "<span class=\"label label-danger\">" + parseFloat(tProblem.penalty) + "</span></td>";
+                        problemHTML += "<span class=\"label label-danger\">" + parseInt(tProblem.penalty/10) + "." + parseInt(tProblem.penalty % 10) + "</span></td>";
                     }
                 }
             }
