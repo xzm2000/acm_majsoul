@@ -448,6 +448,9 @@ Board.prototype.showInitBoard = function() {
                     }
                 }
             }
+			else{
+				problemHTML += "<span class=\"label label-warning\">" + "--" + "</span></td>";
+			}
         }
         var footHTML =
             "</tr> \
