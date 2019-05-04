@@ -233,10 +233,10 @@ Team.prototype.updateOneProblem = function() {
  * @return {int} 负数a排位高，正数b排位高
  */
 function TeamCompare(a, b) {
-    if (a.solved != b.solved) //第一关键字，通过题数高者排位高
-        return a.solved > b.solved ? -1 : 1;
     if (a.penalty != b.penalty) //第二关键字，罚时少者排位高
         return a.penalty > b.penalty ? -1 : 1;
+    if (a.solved != b.solved) //第一关键字，通过题数高者排位高
+        return a.solved > b.solved ? -1 : 1;
 	return a.teamId < b.teamId;//对于0题队固定顺序
 }
 
@@ -431,7 +431,7 @@ Board.prototype.showInitBoard = function() {
 		else rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + "*" + "</th>";
         var teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
         var solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.solved + "</td>";
-        var penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(team.penalty%10) + "</td>";
+        var penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
         var problemHTML = "";
         for (var key in this.problemList) {
             problemHTML += "<td class=\"problem-status\" width=\"" + problemStatusPer + "%\" alphabet-id=\"" + this.problemList[key] + "\">";
@@ -441,10 +441,10 @@ Board.prototype.showInitBoard = function() {
                     problemHTML += "<span class=\"label label-warning\">" + tProblem.submitCount + "</span></td>";
                 else {
                     if (tProblem.penalty >= 0) {
-							problemHTML += "<span class=\"label label-success\">" + parseInt(tProblem.penalty/10) + "." + parseInt(tProblem.penalty % 10) + "</td>";
+							problemHTML += "<span class=\"label label-success\">" + parseInt(tProblem.penalty/10) + "." + parseInt(Math.abs(tProblem.penalty) % 10) + "</td>";
                         //problemHTML += "<span class=\"label label-success\">" + tProblem.submitCount + "/" + parseInt(tProblem.acceptedTime / 1000.0 / 60.0) + "</span></td>";
                     } else {
-                        problemHTML += "<span class=\"label label-danger\">" + parseInt(tProblem.penalty/10) + "." + parseInt(tProblem.penalty % 10) + "</span></td>";
+                        problemHTML += "<span class=\"label label-danger\">" + parseInt(tProblem.penalty/10) + "." + parseInt(Math.abs(tProblem.penalty) % 10) + "</span></td>";
                     }
                 }
             }
