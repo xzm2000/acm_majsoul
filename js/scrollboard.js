@@ -54,13 +54,12 @@ function getTeamList() {
         async: false,
         data: {},
         success: function(result) {
-			var cnt = 1;
             for (var key in result) {
                 var team = result[key];
 				var ss=team.name;
+				var id = parseInt(team.id);
 				while (ss!=ss.replace('.','_')) ss=ss.replace('.','_');
-				data[cnt]=new Team(cnt, ss , team.sex, true);
-				cnt++;
+				data[id]=new Team(id, ss , team.sex, true);
             }
         },
         error: function() {
