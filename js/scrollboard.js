@@ -59,7 +59,12 @@ function getTeamList() {
 				var ss=team.name;
 				var id = parseInt(team.id);
 				while (ss!=ss.replace('.','_')) ss=ss.replace('.','_');
-				data[id]=new Team(id, ss , team.sex, true);
+				if (id <= 32)
+					data[id]=new Team(id, ss , team.sex, true);
+				else
+				{
+					data[id] = new Team(id,ss,team.sex,false,team.score);
+				}
             }
         },
         error: function() {
@@ -139,7 +144,7 @@ function TeamProblem() {
  * @param {String}  teamMember  队员
  * @param {boolean} official     是否计入排名
  */
-function Team(teamId, teamName, gender, official) {
+function Team(teamId, teamName, gender, official, score = "") {
     this.teamId = teamId; //队伍ID
     this.teamName = teamName; //队伍名
     this.official = official; //计入排名
@@ -152,6 +157,7 @@ function Team(teamId, teamName, gender, official) {
     this.lastRank = 0; //最终排名
     this.nowRank = 0; //当前排名
 	this.lastAC = 0;
+	this.score = score;
 }
 
 /**
@@ -232,6 +238,8 @@ Team.prototype.updateOneProblem = function() {
  * @return {int} 负数a排位高，正数b排位高
  */
 function TeamCompare(a, b) {
+	if (a.official != b.official)
+		return a.official > b.official ? -1 : 1;
     if (a.penalty != b.penalty) //第二关键字，罚时少者排位高
         return a.penalty > b.penalty ? -1 : 1;
     if (a.solved != b.solved) //第一关键字，通过题数高者排位高
@@ -403,16 +411,8 @@ Board.prototype.showInitBoard = function() {
         //计算每支队伍的排名和奖牌情况
         var rank = maxRank-1;
         var medal = -1;
-        //if (team.solved != 0) {
-			if (team.official==true)
-			{
-            	rank = maxRank;
-            	maxRank = rank + 1;
-			}/*
-        } else {
-            rank = maxRank;
-            medal = -1;
-        }*/
+		rank = maxRank;
+		maxRank = rank + 1;
 
 
         //构造HTML
@@ -420,13 +420,21 @@ Board.prototype.showInitBoard = function() {
             "<div id=\"team_" + team.teamId + "\" class=\"team-item\" team-id=\"" + team.teamId + "\"> \
                     <table class=\"table\"> \
                         <tr>";
-		var rankHTML;
+		var rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + rank + "</th>";
+        var teamHTML; 
+		if (team.gender == 1)
+			teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span><font color=\"#FF9999\">" + team.teamName +  "</font></span></td>";
+		else
+			teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
+        var solvedHTML;
 		if (team.official==true)
-        	 rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + rank + "</th>";
-		else rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + "*" + "</th>";
-        var teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
-        var solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.solved + "</td>";
-        var penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
+			solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.solved + "</td>";
+		else solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\"><font color=\"red\">" + "淘汰" + "</font></td>";
+        var penaltyHTML;
+		if (team.official==true)
+			penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
+		else 
+			penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + team.score + "</td>";
         var problemHTML = "";
         for (var key in this.problemList) {
             problemHTML += "<td class=\"problem-status\" width=\"" + problemStatusPer + "%\" alphabet-id=\"" + this.problemList[key] + "\">";
@@ -444,7 +452,8 @@ Board.prototype.showInitBoard = function() {
                 }
             }
 			else{
-				problemHTML += "<span class=\"label label-warning\">" + "--" + "</span></td>";
+				if (team.official == true)
+					problemHTML += "<span class=\"label label-warning\">" + "--" + "</span></td>";
 			}
         }
         var footHTML =
@@ -456,8 +465,10 @@ Board.prototype.showInitBoard = function() {
         //填充HTML
         $('body').append(HTML);
         //设置奖牌对应的CSS样式
+		/*
         if (team.gender == 1)
             $("#team_" + team.teamId).addClass("girl");
+		*/
 
     }
 
