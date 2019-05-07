@@ -386,7 +386,7 @@ Board.prototype.showInitBoard = function() {
                 <tr>\
                     <th width=\"" + rankPer + "%\">Rank</th>\
                     <th width=\"" + teamPer + "%\">Team</th>\
-                    <th width=\"" + solvedPer + "%\">Finished</th>\
+                    <th width=\"" + solvedPer + "%\">Finish</th>\
                     <th width=\"" + penaltyPer + "%\">Score</th>";
     var footHTML =
         "</tr>\
@@ -396,7 +396,9 @@ Board.prototype.showInitBoard = function() {
 
     //题目列
     for (var i = 0; i < this.problemList.length; i++) {
-        var alphabetId = this.problemList[i];
+        var alphabetId;
+		if (i == 0) alphabetId = "预赛带分";
+		else alphabetId = "第" + i + "局";
         var bodyHTML = "<th width=\"" + problemStatusPer + "%\">" + alphabetId + "</th>";
         $('.ranktable-head tr').append(bodyHTML);
     }
@@ -428,7 +430,7 @@ Board.prototype.showInitBoard = function() {
 			teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
         var solvedHTML;
 		if (team.official==true)
-			solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.solved + "</td>";
+			solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + (team.solved - 1) + "</td>";
 		else solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\"><font color=\"red\">" + "淘汰" + "</font></td>";
         var penaltyHTML;
 		if (team.official==true)
