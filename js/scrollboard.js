@@ -244,7 +244,7 @@ function TeamCompare(a, b) {
         return a.penalty > b.penalty ? -1 : 1;
     if (a.solved != b.solved) //第一关键字，通过题数高者排位高
         return a.solved > b.solved ? -1 : 1;
-	return a.teamId < b.teamId;//对于0题队固定顺序
+	return a.teamId < b.teamId ? -1 : 1;//对于0题队固定顺序
 }
 
 
