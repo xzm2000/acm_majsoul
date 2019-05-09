@@ -22,7 +22,7 @@ function getSubmitList() {
 	$.ajax({
         type: "GET",
         content: "application/x-www-form-urlencoded",
-        url: "data/submit.json",
+        url: "data/submit.json?"+Date.now(),
         dataType: "json",
         data: {},
         async: false,
@@ -49,7 +49,7 @@ function getTeamList() {
 	$.ajax({
         type: "GET",
         content: "application/x-www-form-urlencoded",
-        url: "data/team.json",
+        url: "data/team.json?"+Date.now(),
         dataType: "json",
         async: false,
         data: {},
