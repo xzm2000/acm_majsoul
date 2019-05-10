@@ -22,7 +22,7 @@ function getSubmitList() {
 	$.ajax({
         type: "GET",
         content: "application/x-www-form-urlencoded",
-        url: "data/submit.json?"+Date.now(),
+        url: "data/submit.json?",
         dataType: "json",
         data: {},
         async: false,
@@ -49,7 +49,7 @@ function getTeamList() {
 	$.ajax({
         type: "GET",
         content: "application/x-www-form-urlencoded",
-        url: "data/team.json?"+Date.now(),
+        url: "data/team.json?",
         dataType: "json",
         async: false,
         data: {},
@@ -59,11 +59,11 @@ function getTeamList() {
 				var ss=team.name;
 				var id = parseInt(team.id);
 				while (ss!=ss.replace('.','_')) ss=ss.replace('.','_');
-				if (id <= 32)
-					data[id]=new Team(id, ss , team.sex, true);
+				if (id <= 16)
+					data[id]=new Team(id, ss, team.sex, true, "", team.seat);
 				else
 				{
-					data[id] = new Team(id,ss,team.sex,false,team.score);
+					data[id] = new Team(id, ss, team.sex, false, team.score);
 				}
             }
         },
@@ -144,7 +144,7 @@ function TeamProblem() {
  * @param {String}  teamMember  队员
  * @param {boolean} official     是否计入排名
  */
-function Team(teamId, teamName, gender, official, score = "") {
+function Team(teamId, teamName, gender, official, score = "", seat = 0) {
     this.teamId = teamId; //队伍ID
     this.teamName = teamName; //队伍名
     this.official = official; //计入排名
@@ -158,6 +158,7 @@ function Team(teamId, teamName, gender, official, score = "") {
     this.nowRank = 0; //当前排名
 	this.lastAC = 0;
 	this.score = score;
+	this.seat = seat;
 }
 
 /**
@@ -386,7 +387,7 @@ Board.prototype.showInitBoard = function() {
                 <tr>\
                     <th width=\"" + rankPer + "%\">Rank</th>\
                     <th width=\"" + teamPer + "%\">Team</th>\
-                    <th width=\"" + solvedPer + "%\">Finish</th>\
+                    <th width=\"" + solvedPer + "%\">桌号</th>\
                     <th width=\"" + penaltyPer + "%\">Score</th>";
     var footHTML =
         "</tr>\
@@ -397,7 +398,7 @@ Board.prototype.showInitBoard = function() {
     //题目列
     for (var i = 0; i < this.problemList.length; i++) {
         var alphabetId;
-		if (i == 0) alphabetId = "预赛带分";
+		if (i == 0) alphabetId = "上轮带分";
 		else alphabetId = "第" + i + "局";
         var bodyHTML = "<th width=\"" + problemStatusPer + "%\">" + alphabetId + "</th>";
         $('.ranktable-head tr').append(bodyHTML);
@@ -430,7 +431,7 @@ Board.prototype.showInitBoard = function() {
 			teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
         var solvedHTML;
 		if (team.official==true)
-			solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + (team.solved - 1) + "</td>";
+			solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.seat + "</td>";
 		else solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\"><font color=\"red\">" + "淘汰" + "</font></td>";
         var penaltyHTML;
 		if (team.official==true)
