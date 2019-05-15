@@ -26,5 +26,9 @@
 	{"team":"2","num":"3","score":"271"},
 	{"team":"3","num":"3","score":"-302"},
 	{"team":"6","num":"3","score":"137"},
-	{"team":"7","num":"3","score":"-106"}
+	{"team":"7","num":"3","score":"-106"},
+	{"team":"2","num":"4","score":"-199"},
+	{"team":"3","num":"4","score":"-55"},
+	{"team":"6","num":"4","score":"-322"},
+	{"team":"7","num":"4","score":"576"}
 ]
