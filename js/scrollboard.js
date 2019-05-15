@@ -450,7 +450,7 @@ Board.prototype.showInitBoard = function() {
 							problemHTML += "<span class=\"label label-success\">" + parseInt(tProblem.penalty/10) + "." + parseInt(Math.abs(tProblem.penalty) % 10) + "</td>";
                         //problemHTML += "<span class=\"label label-success\">" + tProblem.submitCount + "/" + parseInt(tProblem.acceptedTime / 1000.0 / 60.0) + "</span></td>";
                     } else {
-                        problemHTML += "<span class=\"label label-danger\">" + parseInt(tProblem.penalty/10) + "." + parseInt(Math.abs(tProblem.penalty) % 10) + "</span></td>";
+                        problemHTML += "<span class=\"label label-danger\">" + "-" + parseInt((-tProblem.penalty)/10) + "." + parseInt(Math.abs(tProblem.penalty) % 10) + "</span></td>";
                     }
                 }
             }
