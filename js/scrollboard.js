@@ -59,11 +59,12 @@ function getTeamList() {
 				var ss=team.name;
 				var id = parseInt(team.id);
 				while (ss!=ss.replace('.','_')) ss=ss.replace('.','_');
-				if (id <= 8)
+				if (id <= 4)
 					data[id]=new Team(id, ss, team.sex, true, "", team.seat);
 				else
 				{
-					data[id] = new Team(id, ss, team.sex, false, team.score);
+					if (id >= 33) data[id]=new Team(id, ss, team.sex, false, "", team.seat);
+					else data[id] = new Team(id, ss, team.sex, false, team.score);
 				}
             }
         },
@@ -241,6 +242,11 @@ Team.prototype.updateOneProblem = function() {
 function TeamCompare(a, b) {
 	if (a.official != b.official)
 		return a.official > b.official ? -1 : 1;
+	if (a.official == b.official)
+	{
+		if (a.teamId >= 33 && b.teamId <= 32) return -1;
+		if (a.teamId <= 32 && b.teamId >= 33) return 1;
+	}
     if (a.penalty != b.penalty) //第二关键字，罚时少者排位高
         return a.penalty > b.penalty ? -1 : 1;
     if (a.solved != b.solved) //第一关键字，通过题数高者排位高
@@ -423,18 +429,23 @@ Board.prototype.showInitBoard = function() {
             "<div id=\"team_" + team.teamId + "\" class=\"team-item\" team-id=\"" + team.teamId + "\"> \
                     <table class=\"table\"> \
                         <tr>";
-		var rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + rank + "</th>";
+		var rankHTML;
+		if (team.teamId <= 4)
+			rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + rank + "</th>";
+		else if (team.teamId <= 32)
+			rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + team.teamId + "</th>";
+		else rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + "*" + "</th>";
         var teamHTML; 
 		if (team.gender == 1)
 			teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span><font color=\"#FF9999\">" + team.teamName +  "</font></span></td>";
 		else
 			teamHTML = "<td class=\"team-name\" width=\"" + teamPer + "%\"><span>" + team.teamName +  "</span></td>";
         var solvedHTML;
-		if (team.official==true)
+		if (team.official==true || team.teamId >= 33)
 			solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\">" + team.seat + "</td>";
 		else solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\"><font color=\"red\">" + "淘汰" + "</font></td>";
         var penaltyHTML;
-		if (team.official==true)
+		if (team.official==true || team.teamId >= 33)
 			penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
 		else 
 			penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + team.score + "</td>";
@@ -455,7 +466,7 @@ Board.prototype.showInitBoard = function() {
                 }
             }
 			else{
-				if (team.official == true)
+				if (team.official == true || team.teamId >= 33)
 					problemHTML += "<span class=\"label label-warning\">" + "--" + "</span></td>";
 			}
         }
