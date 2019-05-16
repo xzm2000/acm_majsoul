@@ -247,8 +247,10 @@ function TeamCompare(a, b) {
 		if (a.teamId >= 33 && b.teamId <= 32) return -1;
 		if (a.teamId <= 32 && b.teamId >= 33) return 1;
 	}
-    if (a.penalty != b.penalty) //第二关键字，罚时少者排位高
+    if (a.official == true && a.penalty != b.penalty) //第二关键字，罚时少者排位高
         return a.penalty > b.penalty ? -1 : 1;
+    if (a.official == false && a.penalty != b.penalty) //第二关键字，罚时少者排位高
+        return a.penalty > b.penalty ? 1 : -1;
     if (a.solved != b.solved) //第一关键字，通过题数高者排位高
         return a.solved > b.solved ? -1 : 1;
 	return a.teamId < b.teamId ? -1 : 1;//对于0题队固定顺序
