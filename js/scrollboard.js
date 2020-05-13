@@ -406,7 +406,7 @@ Board.prototype.showInitBoard = function() {
     //题目列
     for (var i = 0; i < this.problemList.length; i++) {
         var alphabetId;
-		if (i == 0) alphabetId = "上轮带分";
+		if (i == 0) alphabetId = "上轮总分";
 		else alphabetId = "第" + i + "局";
         var bodyHTML = "<th width=\"" + problemStatusPer + "%\">" + alphabetId + "</th>";
         $('.ranktable-head tr').append(bodyHTML);
@@ -432,7 +432,7 @@ Board.prototype.showInitBoard = function() {
                     <table class=\"table\"> \
                         <tr>";
 		var rankHTML;
-		if (team.teamId <= 4)
+		if (team.teamId <= 24)
 			rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + rank + "</th>";
 		else if (team.teamId <= 32)
 			rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + team.teamId + "</th>";
