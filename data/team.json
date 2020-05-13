@@ -22,5 +22,8 @@
 {"id":"21","name":"RegenFallen","seat":"6","score":"","sex":"0"},
 {"id":"22","name":"DeaphetS","seat":"5","score":"","sex":"0"},
 {"id":"23","name":"FlierKing","seat":"5","score":"","sex":"0"},
-{"id":"24","name":"静沐暖阳","seat":"1","score":"","sex":"1"}
+{"id":"24","name":"静沐暖阳","seat":"1","score":"","sex":"1"},
+{"id":"25", "name":"永远的殿下", "seat":"9", "score":"", "sex":"0"},
+{"id":"26", "name":"calabash", "seat":"9", "score":"", "sex":"0"},
+{"id":"27", "name":"曦月", "seat":"9", "score":"", "sex":"0"}
 ]
