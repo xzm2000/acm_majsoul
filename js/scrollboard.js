@@ -59,7 +59,7 @@ function getTeamList() {
 				var ss=team.name;
 				var id = parseInt(team.id);
 				while (ss!=ss.replace('.','_')) ss=ss.replace('.','_');
-				if (id <= 4)
+				if (id <= 24)
 					data[id]=new Team(id, ss, team.sex, true, "", team.seat);
 				else
 				{

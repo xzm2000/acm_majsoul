@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8028a77d-c949-4895-8ce6-ea8737a322a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/data/submit.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/submit.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/scrollboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scrollboard.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -50,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/js/scrollboard.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="408" column="37" selection-start-line="408" selection-start-column="37" selection-end-line="408" selection-end-column="37" />
+              <caret line="63" column="20" lean-forward="true" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -223,12 +222,12 @@
       <option name="presentableId" value="Default" />
       <updated>1552393590502</updated>
       <workItem from="1552393592000" duration="321000" />
-      <workItem from="1589358245827" duration="4925000" />
+      <workItem from="1589358245827" duration="5079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5246000" />
+    <option name="totallyTimeSpent" value="5400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -338,7 +337,7 @@
     <entry file="file://$PROJECT_DIR$/js/scrollboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="408" column="37" selection-start-line="408" selection-start-column="37" selection-end-line="408" selection-end-column="37" />
+          <caret line="63" column="20" lean-forward="true" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
