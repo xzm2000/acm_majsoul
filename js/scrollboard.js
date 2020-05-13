@@ -59,7 +59,7 @@ function getTeamList() {
 				var ss=team.name;
 				var id = parseInt(team.id);
 				while (ss!=ss.replace('.','_')) ss=ss.replace('.','_');
-				if (id <= 24)
+				if (id <= 27)
 					data[id]=new Team(id, ss, team.sex, true, "", team.seat);
 				else
 				{
@@ -432,7 +432,7 @@ Board.prototype.showInitBoard = function() {
                     <table class=\"table\"> \
                         <tr>";
 		var rankHTML;
-		if (team.teamId <= 24)
+		if (team.teamId <= 27)
 			rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + rank + "</th>";
 		else if (team.teamId <= 32)
 			rankHTML = "<th class=\"rank\" width=\"" + rankPer + "%\">" + team.teamId + "</th>";
