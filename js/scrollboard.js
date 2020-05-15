@@ -448,7 +448,9 @@ Board.prototype.showInitBoard = function() {
 		else solvedHTML = "<td class=\"solved\" width=\"" + solvedPer + "%\"><font color=\"red\">" + "淘汰" + "</font></td>";
         var penaltyHTML;
 		if (team.official==true || team.teamId >= 33)
-			penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
+			if(team.penalty >= 0)
+				penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + parseInt(team.penalty/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
+			else penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + "-" + parseInt((-team.penalty)/10) + "." + parseInt(Math.abs(team.penalty) %10) + "</td>";
 		else 
 			penaltyHTML = "<td class=\"penalty\" width=\"" + penaltyPer + "%\">" + team.score + "</td>";
         var problemHTML = "";
