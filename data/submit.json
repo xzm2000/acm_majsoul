@@ -57,5 +57,20 @@
 	{"team":"21","num":"3","score":"-490"},
 	
 	{"team":"24","num":"1","score":"0"},
-	{"team":"24","num":"2","score":"-691"}
+	{"team":"24","num":"2","score":"-691"},
+
+	{"team":"25","num":"1","score":"0"},
+	{"team":"25","num":"2","score":"-416"},
+	{"team":"25","num":"3","score":"-382"},
+	{"team":"25","num":"4","score":"112"},
+
+	{"team":"26","num":"1","score":"0"},
+	{"team":"26","num":"2","score":"307"},
+	{"team":"26","num":"3","score":"63"},
+	{"team":"26","num":"4","score":"-496"},
+
+	{"team":"27","num":"1","score":"0"},
+	{"team":"27","num":"2","score":"109"},
+	{"team":"27","num":"3","score":"-445"},
+	{"team":"27","num":"4","score":"384"}
 ]
